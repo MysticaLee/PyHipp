@@ -14,10 +14,17 @@
 #SBATCH -e fsall-slurm.%N.%j.err # STDERR
 
 # LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+python -u -c "import PyHipp as pyh; \
 import DataProcessingTools as DPT; \
+import os; \
+import time; \
+t0 = time.time(); \
+print(time.localtime()); \
 lfall = DPT.objects.processDirs(dirs=None, exclude=['*eye*', '*mountains*'], objtype=pyh.FreqSpectrum, saveLevel=1); \
 lfall.save(); \
 hfall = DPT.objects.processDirs(dirs=None, exclude=['*eye*', '*mountains*'], objtype=pyh.FreqSpectrum, loadHighPass=True, pointsPerWindow=3000, saveLevel=1); \
 hfall.save();
+print(time.localtime()); \
+print(time.time()-t0);"
 
 aws sns publish --topic-arn arn:aws:sns:ap-southeast-1:390874613640:awsnotify --message "FSJobDone"
