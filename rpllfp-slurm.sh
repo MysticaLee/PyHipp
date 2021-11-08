@@ -9,12 +9,20 @@
 #SBATCH -J "rpllfp"   # job name
 
 ## /SBATCH -p general # partition (queue)
+<<<<<<< HEAD
 #SBATCH -o rsllfp-slurm.%N.%j.out # STDOUT
 #SBATCH -e rsllfp-slurm.%N.%j.err # STDERR
+=======
+#SBATCH -o rpllfp-slurm.%N.%j.out # STDOUT
+#SBATCH -e rpllfp-slurm.%N.%j.err # STDERR
+>>>>>>> upstream/main
 
 # LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
 python -u -c "import PyHipp as pyh; \
 import time; \
 pyh.RPLLFP(saveLevel=1); \
 print(time.localtime());"
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/main
